@@ -1,20 +1,18 @@
 -----------------------------------------------------------------------------
 --
--- Module      :  OSC
--- Copyright   :  (c) Simon Marlow
+-- Module      :  Sound.OSC.Parser
+-- Copyright   :  (c) Gabriel Pickl
 -- License     :  BSD3
 --
--- Maintainer  :  Simon Marlow <marlowsd@gmail.com>
--- Stability   :  stable
+-- Maintainer  :  Gabriel Pickl <peacemotion@gmail.com>
+-- Stability   :  unstable
 -- Portability :
 --
 -- |
 --
 -----------------------------------------------------------------------------
 
-module OSC (
-    OSC,
-    Datum,
+module Sound.OSC.Parser (
     osc
 ) where
 
@@ -32,18 +30,7 @@ import qualified Data.ByteString as BS
 import Data.ByteString.Lazy (fromStrict)
 import Data.ByteString (ByteString)
 
-type Timestamp = Word64
-
-data OSC = Bundle Timestamp [OSC]
-         | Message String [Datum]
-         deriving (Show)
-
--- Minimal type definition for OSC
-data Datum = String String
-           | Int    Int32
-           | Float  Float
-           | Blob   ByteString
-           deriving (Show)
+import Sound.OSC
 
 nest :: AP.Parser ByteString -> AP.Parser a -> AP.Parser a
 nest bsp p = bsp >>= parse
@@ -114,7 +101,7 @@ bundle = do
 bundleElement :: AP.Parser OSC
 bundleElement = do
     length <- int32
-    nest (AP.take $ fromIntegral length) message
+    nest (AP.take $ fromIntegral length) osc
 
 osc :: AP.Parser OSC
 osc = do
