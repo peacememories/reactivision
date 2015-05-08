@@ -27,7 +27,11 @@ flag threaded
 
 executable reactivision
     build-depends: base >=4.2 && <5,
-                   attoparsec == 0.12.*
+                   attoparsec == 0.12.*,
+                   binary == 0.7.*,
+                   bytestring == 0.10.*,
+                   data-binary-ieee754 == 0.4.*,
+                   network == 2.6.*
 
     if flag(threaded)
         buildable: True
