@@ -9,8 +9,8 @@ mkDerivation {
   src = fetchFromGitHub {
     owner = "peacememories";
     repo = "helm";
-    rev = "3a964ade523f95986f2e3e3431523300e6e7d87d";
-    sha256 = "0dz5rkwhxicdz9aa6b3n5r2z7rqdx2vsy8xdlcl05j7xlkszgij3";
+    rev = "3fafc398f95711d3015e6f61b01cc24defc03af4";
+    sha256 = "052pb3gzgqw1rcvbbgjfqg8v3b8lrgn5zhkw6w53bqm1gmvwdhbq";
   };
   buildDepends = [
     base cairo containers cpu elerea filepath mtl pango random sdl2
