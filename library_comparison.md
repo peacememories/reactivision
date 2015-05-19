@@ -48,6 +48,14 @@ Hieroglyph is a pure-functional 2D graphics library focused on visualization.
 
 verrry basic (path, string and that's it)
 
+## Diagrams
+
+documentation: <http://projects.haskell.org/diagrams/doc/manual.html>
+
+* declarative diagrams
+* can render to screen
+* has event-listeners
+* uses cairo as backend
 
 # Rendering Essential
 
