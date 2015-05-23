@@ -1,4 +1,5 @@
 import processing.core.*;
+import shiffman.box2d.*;
 
 public class TestSketch extends PApplet {
  
@@ -7,6 +8,7 @@ public class TestSketch extends PApplet {
   // (there's more there)
 
   public void setup() {
+    //Box2DProcessing b = new Box2DProcessing(this);
     size(200,200);
     background(0);
   }
