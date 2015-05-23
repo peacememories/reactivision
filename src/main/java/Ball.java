@@ -54,14 +54,13 @@ public class Ball {
 
         // We look at each body and get its screen position
         Vec2 pos = box2d.getBodyPixelCoord(body);
-        System.out.println(pos);
         // Get its angle of rotation
-        float a = body.getAngle();
+        //float a = body.getAngle();
 
         p.rectMode(p.CENTER);
         p.pushMatrix();
         p.translate(pos.x, pos.y);
-        p.rotate(-a);
+        //p.rotate(-a);
         p.fill(210);
         p.stroke(0);
         p.ellipse(0, 0, 10, 10);
