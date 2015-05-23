@@ -1,31 +1,18 @@
 apply plugin: 'java'
-//apply plugin: 'git-dependencies'
-apply from: 'https://raw.github.com/bat-cha/gradle-plugin-git-dependencies/0.2/git-dependencies.gradle'
 
 repositories {
     mavenCentral()
+    flatDir {
+       dirs 'lib'
+    }
 }
 
 version = '1.0'
 
 dependencies {
-    compile 'org.batcha.gradle.plugins:git-dependencies:0.2'
-    //classpath 'org.batcha.gradle.plugins:git-dependencies:0.2'
     compile 'org.processing:core:2.2.1'
-
-    //compile('org.batcha:dummy-project-a:4.2').ext.git = 'https://github.com/bat-cha/dummy-java-project-a.git'
-    //compile('com.github.shiffman:box2d:2.0').ext.git = 'https://github.com/shiffman/Box2D-for-Processing.git'
-
-    //compile 'com.github.shiffman.box2d-for-processing:2.0'
-    //compile 'org.batcha.gradle.plugins:git-dependencies:0.2'
-    //compile 'https://github.com/shiffman/Box2D-for-Processing.git'
-
-    //compile('org.anic:myproject:42.0') {
-    //  ext.git = 'git@github.com:fabzo/gradle-plugin-git-dependencies.git'
-    //  ext.gitVersion = 'some/otherBranch/h2g2'
-    //}
-
-
+    compile name: 'box2d_processing'
+    compile name: 'jbox2d-library-2.2.1-ds'
 }
 
 task run(type: JavaExec, dependsOn: classes) {
@@ -33,4 +20,3 @@ task run(type: JavaExec, dependsOn: classes) {
     classpath sourceSets.main.runtimeClasspath
     classpath configurations.runtime
 }
-
