@@ -7,6 +7,7 @@ public class Dispatcher extends EventSource<Dispatcher.DispatchHandler> {
     private final static Dispatcher instance = new Dispatcher();
 
     private Object currentPayload;
+    private boolean dispatching = false;
 
     public static Dispatcher getInstance() {
         return instance;
@@ -14,9 +15,15 @@ public class Dispatcher extends EventSource<Dispatcher.DispatchHandler> {
 
     private Dispatcher() {}
 
-    public synchronized void dispatch(Object payload) {
-        currentPayload = payload;
-        fireAll();
+    public void dispatch(Object payload) {
+        if(dispatching)
+            throw new DispatchException("Dispatch is already running with event: " + currentPayload);
+        synchronized (this) {
+            dispatching = true;
+            currentPayload = payload;
+            fireAll();
+            dispatching = false;
+        }
     }
 
     @Override
@@ -26,5 +33,26 @@ public class Dispatcher extends EventSource<Dispatcher.DispatchHandler> {
 
     public static interface DispatchHandler {
         public void handle(Object payload);
+    }
+
+    public static class DispatchException extends RuntimeException {
+        public DispatchException() {
+        }
+
+        public DispatchException(String message) {
+            super(message);
+        }
+
+        public DispatchException(String message, Throwable cause) {
+            super(message, cause);
+        }
+
+        public DispatchException(Throwable cause) {
+            super(cause);
+        }
+
+        public DispatchException(String message, Throwable cause, boolean enableSuppression, boolean writableStackTrace) {
+            super(message, cause, enableSuppression, writableStackTrace);
+        }
     }
 }
