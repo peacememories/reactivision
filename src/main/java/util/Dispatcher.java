@@ -12,6 +12,8 @@ public class Dispatcher extends EventSource<Dispatcher.DispatchHandler> {
         return instance;
     }
 
+    private Dispatcher() {}
+
     public synchronized void dispatch(Object payload) {
         currentPayload = payload;
         fireAll();
