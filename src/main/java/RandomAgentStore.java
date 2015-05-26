@@ -25,9 +25,9 @@ public class RandomAgentStore {
         //TODO dummy data for now
         int screenWidth = 600;
         int screenHeight = 600;
-        agentCtrls.add(new RandomAgent(1234, screenWidth, screenHeight));
-        agentCtrls.add(new RandomAgent(5678, screenWidth, screenHeight));
-        agentCtrls.add(new RandomAgent(9012, screenWidth, screenHeight));
+        agentCtrls.add(new RandomAgent(1233, screenWidth, screenHeight));
+        agentCtrls.add(new RandomAgent(5679, screenWidth, screenHeight));
+        agentCtrls.add(new RandomAgent(9013, screenWidth, screenHeight));
     }
 
     public Set<RandomAgent> getAgents() {

@@ -38,18 +38,33 @@ public class TestSketch extends PApplet {
 
     // ---------- Creating Game Pieces ------
     ball = new Ball(box2d, this);
+
+    lastFrame = System.currentTimeMillis();
   }
 
   // ------- DEMO CIRCLE VARS ---------------
+  private long lastFrame;
   public void draw() {
-    background(30);
+    long now = System.currentTimeMillis();
+    float deltaSeconds = (now - lastFrame) / 1000.0f;
 
+    // UPDATES ---------------
     // We must always step through time!
-    box2d.step(1.0f/60,10,10);
-
+    box2d.step(1.0f / 60, 10, 10);
     // TODO if there should be any shapes that can leave the screen: delete them now
 
+    RandomAgentStore.getStore().update(deltaSeconds);
+
+
+    // RENDERING -------------
+    background(30);
     ball.render(this);
+
+    AgentRenderer.getRenderer().render(this);
+
+
+
+    lastFrame = now;
   }
 
   public static void main(String args[]) {
