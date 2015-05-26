@@ -6,19 +6,32 @@ import java.util.Date;
  */
 public class Agent {
 
-    private final float speed;
+    private float speed = 0.0f;
     private PVector position, goal;
 
     /**
      * @param position
-     * @param speed in units per second
      */
-    public Agent(PVector position, float speed) {
+    public Agent(PVector position) {
         this.position = position;
-        this.speed = speed;
     }
-    public void setGoal(PVector goal) {
+    public Agent setGoal(PVector goal) {
         this.goal = goal;
+        return this;
+    }
+
+    /**
+     *
+     * @param speed in units per second
+     * @return
+     */
+    public Agent setSpeed(float speed) {
+        this.speed = speed;
+        return this;
+    }
+
+    public PVector getPosition(){
+        return position.get();
     }
 
     public void update(float deltaSeconds) {

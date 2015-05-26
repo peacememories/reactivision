@@ -52,7 +52,7 @@ public class Ball {
     public void render(PApplet p){
         // ------------- DRAW DEMO CIRCLE -------------------
 
-        // We look at each body and get its screen position
+        // We look at each body and getAgents its screen position
         Vec2 pos = box2d.getBodyPixelCoord(body);
         // Get its angle of rotation
         //float a = body.getAngle();
