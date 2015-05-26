@@ -51,6 +51,7 @@ setting where people rapidly join and leave might be impacting learning the thin
     * allow interaction to display the agents path (and the places of attractors they've interacted with back then)
         * breaks the interaction
 
+log actions and graph. calculate correlation of certain actions with good graph values to help identify effective moves
 
 
 ------
