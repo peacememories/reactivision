@@ -1,20 +1,34 @@
+import util.Dispatcher;
+
 import java.util.Collections;
 import java.util.LinkedList;
 
 /**
  * Created by gabriel on 26/05/2015.
  */
-public class HappinessStore {
-    private static final LinkedList<HistoryEntry> history = new LinkedList<>();
+public class HappinessStore implements Dispatcher.DispatchHandler {
+    private final static HappinessStore instance = new HappinessStore();
 
-    private HappinessStore() {}
-
-    public static void logEntry(long time, float happiness) {
-        history.add(new HistoryEntry(time, happiness));
+    public static HappinessStore getInstance() {
+        return instance;
     }
 
-    public static Iterable<HistoryEntry> getLogs() {
+    private final LinkedList<HistoryEntry> history = new LinkedList<>();
+
+    private HappinessStore() {
+        Dispatcher.getInstance().register(this);
+    }
+
+    public Iterable<HistoryEntry> getLogs() {
         return Collections.unmodifiableList(history);
+    }
+
+    @Override
+    public void handle(Object payload) {
+        if(payload instanceof HistoryEntry) {
+            HistoryEntry entry = (HistoryEntry) payload;
+            history.add(entry);
+        }
     }
 
     public static class HistoryEntry {
