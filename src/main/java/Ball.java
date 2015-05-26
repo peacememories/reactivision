@@ -39,7 +39,7 @@ public class Ball {
         body.createFixture(fd);
 
         // Give it some initial random velocity
-        body.setLinearVelocity(new Vec2(p.random(-5, 5), p.random(2, 5)));
+        body.setLinearVelocity(new Vec2(p.random(-5, 5), p.random(2, 5))); //These should be constructor params instead
         body.setAngularVelocity(p.random(-5, 5));
 
         System.out.println(body);

@@ -26,7 +26,7 @@ public class TestSketch extends PApplet {
   // https://processing.org/tutorials/eclipse/
   // (there's more there)
   public void setup() {
-    size(200, 200);
+    size(600, 600);
     background(0);
     smooth();
 
