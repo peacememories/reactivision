@@ -18,7 +18,7 @@ public class AgentRenderer implements Renderable {
     private AgentRenderer() {}
 
     public void render(PApplet ctxt) {
-        for(RandomAgent agent : RandomAgentStore.getStore().getAgents()) {
+        for(Agent agent : AgentStore.getStore().getAgents()) {
             PVector pos = agent.getPosition();
             ctxt.rectMode(ctxt.CENTER);
             ctxt.pushMatrix();

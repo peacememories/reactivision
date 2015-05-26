@@ -4,7 +4,7 @@
 import processing.core.PVector;
 import java.util.Random;
 
-public class RandomAgent {
+public class Agent {
     private Random random;
     private float secondsToGoalChange = 0.0f;
     private final int screenWidth, screenHeight;
@@ -15,7 +15,7 @@ public class RandomAgent {
     private float speed = 0.0f;
     private PVector position, goal;
 
-    public RandomAgent(long seed, int screenWidth, int screenHeight) {
+    public Agent(long seed, int screenWidth, int screenHeight) {
         random = new Random(seed);
         this.screenWidth = screenWidth;
         this.screenHeight = screenHeight;
@@ -68,7 +68,7 @@ public class RandomAgent {
         return new PVector(x, y);
     }
 
-    public RandomAgent setGoal(PVector goal) {
+    public Agent setGoal(PVector goal) {
         this.idle = false;
         this.goal = goal;
         return this;
@@ -78,7 +78,7 @@ public class RandomAgent {
      * @param speed in units per second
      * @return
      */
-    public RandomAgent setSpeed(float speed) {
+    public Agent setSpeed(float speed) {
         this.speed = speed;
         return this;
     }

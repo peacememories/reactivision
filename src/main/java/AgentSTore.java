@@ -5,32 +5,32 @@ import java.util.Set;
 /**
  * Created by moru on 5/26/2015.
  */
-public class RandomAgentStore {
+public class AgentSTore {
     //listens to tick event
     //updates agents
 
-    private static RandomAgentStore store;
-    public static RandomAgentStore getStore() {
+    private static AgentSTore store;
+    public static AgentSTore getStore() {
         if(store == null) {
-            store = new RandomAgentStore();
+            store = new AgentSTore();
         }
         return store;
     }
 
-    private Set<RandomAgent> agentCtrls;
+    private Set<Agent> agentCtrls;
 
-    private RandomAgentStore() {
+    private AgentSTore() {
         agentCtrls = new HashSet<>();
 
         //TODO dummy data for now
         int screenWidth = 600;
         int screenHeight = 600;
-        agentCtrls.add(new RandomAgent(1233, screenWidth, screenHeight));
-        agentCtrls.add(new RandomAgent(5679, screenWidth, screenHeight));
-        agentCtrls.add(new RandomAgent(9013, screenWidth, screenHeight));
+        agentCtrls.add(new Agent(1233, screenWidth, screenHeight));
+        agentCtrls.add(new Agent(5679, screenWidth, screenHeight));
+        agentCtrls.add(new Agent(9013, screenWidth, screenHeight));
     }
 
-    public Set<RandomAgent> getAgents() {
+    public Set<Agent> getAgents() {
         return Collections.unmodifiableSet(agentCtrls);
     }
 
@@ -39,7 +39,7 @@ public class RandomAgentStore {
     }
 
     public void update(float deltaSeconds) {
-        for(RandomAgent rac : agentCtrls) {
+        for(Agent rac : agentCtrls) {
             rac.update(deltaSeconds);
         }
     }

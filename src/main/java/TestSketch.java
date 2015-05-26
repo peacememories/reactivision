@@ -1,9 +1,5 @@
 import processing.core.*;
 import shiffman.box2d.*;
-
-import org.jbox2d.collision.shapes.*;
-import org.jbox2d.common.*;
-import org.jbox2d.dynamics.*;
 //import org.jbox2d.collision.shapes.
 
 public class TestSketch extends PApplet {
@@ -53,7 +49,7 @@ public class TestSketch extends PApplet {
     box2d.step(1.0f / 60, 10, 10);
     // TODO if there should be any shapes that can leave the screen: delete them now
 
-    RandomAgentStore.getStore().update(deltaSeconds);
+    AgentStore.getStore().update(deltaSeconds);
 
 
     // RENDERING -------------
