@@ -5,21 +5,21 @@ import java.util.Set;
 /**
  * Created by moru on 5/26/2015.
  */
-public class AgentSTore {
+public class AgentStore {
     //listens to tick event
     //updates agents
 
-    private static AgentSTore store;
-    public static AgentSTore getStore() {
+    private static AgentStore store;
+    public static AgentStore getStore() {
         if(store == null) {
-            store = new AgentSTore();
+            store = new AgentStore();
         }
         return store;
     }
 
     private Set<Agent> agentCtrls;
 
-    private AgentSTore() {
+    private AgentStore() {
         agentCtrls = new HashSet<>();
 
         //TODO dummy data for now
