@@ -1,9 +1,12 @@
 package stores;
 
 import util.Dispatcher;
+import util.Sampler;
 
 import java.util.Collections;
 import java.util.LinkedList;
+import java.util.SortedMap;
+import java.util.TreeMap;
 
 /**
  * Created by gabriel on 26/05/2015.
@@ -15,7 +18,7 @@ public class HappinessStore implements Dispatcher.DispatchHandler {
         return instance;
     }
 
-    private final LinkedList<HistoryEntry> history = new LinkedList<>();
+    private final SortedMap<Long, Float> history = new TreeMap<>();
     private float lastHappiness;
     private long lastTime;
 
@@ -23,8 +26,8 @@ public class HappinessStore implements Dispatcher.DispatchHandler {
         Dispatcher.getInstance().register(this);
     }
 
-    public Iterable<HistoryEntry> getLogs() {
-        return Collections.unmodifiableList(history);
+    public Sampler getLogs() {
+        return new Sampler(history);
     }
 
     public void update(long time) {
@@ -32,9 +35,9 @@ public class HappinessStore implements Dispatcher.DispatchHandler {
         if(deltaTime > 1000) {
             float newHappiness = AgentStore.getStore().avgHappiness();
             if (history.isEmpty()) {
-                history.add(new HistoryEntry(time, 0));
+                history.put(time, 0.0f);
             } else {
-                history.add(new HistoryEntry(time, (newHappiness - lastHappiness) / deltaTime));
+                history.put(time, (newHappiness - lastHappiness) / deltaTime);
             }
             lastHappiness = newHappiness;
             lastTime = time;

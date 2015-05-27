@@ -5,6 +5,7 @@ import processing.core.PVector;
 import util.ListTools;
 import util.Renderable;
 
+import java.util.Collection;
 import java.util.LinkedList;
 
 /**
@@ -28,13 +29,7 @@ public abstract class Graph implements Renderable {
 
     public void render(PApplet context) {
 
-        LinkedList<PVector> points = new LinkedList<>();
-        for(Point p : getPoints()) {
-            points.add(new PVector(
-                    p.x * getWidth(),
-                    getHeight() * (1 - p.y) / 2
-            ));
-        }
+        LinkedList<PVector> points = new LinkedList(getPoints());
 
 
         // paint lower half ---------------
@@ -80,7 +75,7 @@ public abstract class Graph implements Renderable {
 
     }
 
-    public abstract Iterable<Point> getPoints();
+    public abstract Collection<PVector> getPoints();
 
     public static class Point {
         public Point(float x, float y) {

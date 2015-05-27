@@ -1,8 +1,11 @@
 package widgets;
 
+import processing.core.PVector;
 import stores.HappinessStore;
 import util.ListTools;
+import util.Sampler;
 
+import java.util.Collection;
 import java.util.LinkedList;
 
 /**
@@ -14,45 +17,17 @@ public class HappinessGraph extends Graph {
     }
 
     @Override
-    public Iterable<Point> getPoints() {
-        Iterable<HappinessStore.HistoryEntry> source = HappinessStore.getInstance().getLogs();
-        Iterable<Float> values = ListTools.map(new ListTools.Fun1<HappinessStore.HistoryEntry, Float>() {
-            @Override
-            public Float call(HappinessStore.HistoryEntry val) {
-                return val.getHappiness();
-            }
-        }, source);
-        final float max = ListTools.max(ListTools.map(new ListTools.Fun1<Float, Float>() {
-            @Override
-            public Float call(Float val) {
-                return Math.abs(val);
-            }
-        }, values), 0.0f);
-        values = ListTools.map(new ListTools.Fun1<Float, Float>() {
-            @Override
-            public Float call(Float val) {
-                return val / max;
-            }
-        }, values);
-        Iterable<Long> times = ListTools.map(new ListTools.Fun1<HappinessStore.HistoryEntry, Long>() {
-            @Override
-            public Long call(HappinessStore.HistoryEntry val) {
-                return val.getTime();
-            }
-        }, source);
-        final long longest = ListTools.max(times, 0l);
-        final long earliest = longest - (60*1000); //15 minutes;
-        Iterable<Float> newTimes = ListTools.map(new ListTools.Fun1<Long, Float>() {
-            @Override
-            public Float call(Long val) {
-                return (float)(val - earliest) / ((float)longest - earliest);
-            }
-        }, times);
-        return ListTools.zipWith(new ListTools.Fun2<Float, Float, Point>() {
-            @Override
-            public Point call(Float left, Float right) {
-                return new Point(left, right);
-            }
-        }, newTimes, values);
+    public Collection<PVector> getPoints() {
+        Sampler sampler = HappinessStore.getInstance().getLogs();
+        Collection<PVector> vectors = new LinkedList<>();
+        int steps = 20;
+        long delta = 10 * 1000;
+        long now = sampler.last();
+        float scale = 1.0f/Math.max(Math.abs(sampler.max()), Math.abs(sampler.min()));
+        for(int i = 0; i < steps ;i++) {
+            long t = delta*i/steps*delta+(now-delta);
+            vectors.add(new PVector((float)i/steps, sampler.sample(t)*scale));
+        }
+        return vectors;
     }
 }
