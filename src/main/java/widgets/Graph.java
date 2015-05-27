@@ -36,11 +36,11 @@ public abstract class Graph implements Renderable {
             ));
         }
 
-        context.stroke(0, 255, 255);
 
         // paint lower half ---------------
 
         context.beginShape();
+        context.noStroke();
         context.fill(80,180,80);
         context.vertex(0, height); // start in lower left corner
         context.vertex(0, points.getFirst().y);
@@ -58,6 +58,7 @@ public abstract class Graph implements Renderable {
 
 
         context.beginShape();
+        context.noStroke();
         context.fill(120,0,0);
         context.vertex(0, 0); // start in lower left corner
         context.vertex(0, points.getFirst().y);
@@ -73,6 +74,7 @@ public abstract class Graph implements Renderable {
 
         // paint border
 
+        context.stroke(0, 255, 255);
         context.noFill();
         context.rect(getWidth()/2, getHeight()/2, getWidth(), getHeight());
 
