@@ -2,6 +2,9 @@ import processing.core.*;
 import shiffman.box2d.*;
 import util.Widget;
 import widgets.HappinessGraph;
+//import com.artist
+//import tuio
+//import sourceforge.tuio.*;
 //import org.jbox2d.collision.shapes.
 
 public class TestSketch extends PApplet {
@@ -39,13 +42,22 @@ public class TestSketch extends PApplet {
     // ---------- Creating Game Pieces ------
     //ball = new Ball(box2d, this);
 
-    lastFrame = System.currentTimeMillis();
-
     graphWidget = new Widget().setChild(new HappinessGraph(300, 150));
+
+
+    //tuioClient = new TuioClient();
+
+
+
+
+    lastFrame = System.currentTimeMillis();
   }
 
-  // ------- DEMO CIRCLE VARS ---------------
+  //private TuioClient tuioClient;
   private long lastFrame;
+
+
+  // ------- DEMO CIRCLE VARS ---------------
   public void draw() {
     long now = System.currentTimeMillis();
     float deltaSeconds = (now - lastFrame) / 1000.0f;
