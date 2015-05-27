@@ -21,11 +21,13 @@ public class HappinessGraph extends Graph {
         Sampler sampler = HappinessStore.getInstance().getLogs();
         Collection<PVector> vectors = new LinkedList<>();
         int steps = 20;
-        long delta = 10 * 1000;
+        long delta = 2000;
+        long stepwidth = delta/steps;
         long now = sampler.last();
+        sampler = sampler.cut(now-delta, now);
         float scale = 1.0f/Math.max(Math.abs(sampler.max()), Math.abs(sampler.min()));
         for(int i = 0; i < steps ;i++) {
-            long t = delta*i/steps*delta+(now-delta);
+            long t = i*stepwidth+(now-delta);
             vectors.add(new PVector((float)i/steps, sampler.sample(t)*scale));
         }
         return vectors;

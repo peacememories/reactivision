@@ -41,7 +41,7 @@ public abstract class Graph implements Renderable {
         context.vertex(0, points.getFirst().y);
         for(PVector p : points) {
  //           if(p.x >= 0 && p.x <= getWidth()) {
-                context.vertex(p.x, p.y);
+                context.vertex(p.x*getWidth(), (1-p.y)*getHeight()/2);
 //            }
         }
         context.vertex(width, points.getLast().y);

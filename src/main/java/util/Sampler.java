@@ -1,8 +1,6 @@
 package util;
 
-import java.util.Map;
-import java.util.SortedMap;
-import java.util.TreeSet;
+import java.util.*;
 
 /**
  * Created by gabriel on 28/05/2015.
@@ -15,20 +13,19 @@ public class Sampler {
     }
 
     public float sample(long position) {
-        long lastSample = values.firstKey();
-        for(long currentSample: new TreeSet<>(values.keySet())) {
-            if(lastSample == currentSample) continue;
-            if(position < currentSample) {
-                float a = values.get(lastSample);
-                float b = values.get(currentSample);
-                long dist = currentSample-lastSample;
-                float t1 = (float)(position-lastSample)/dist;
-                float t2 = (float)(currentSample-position)/dist;
-                return a*t1 + b*t2;
-            }
-            lastSample = currentSample;
-        }
-        return values.get(values.lastKey());
+        if(values.isEmpty())
+            return 0.0f;
+        SortedSet<Long> keys = new TreeSet<>(values.keySet());
+        SortedSet<Long> lessSet = keys.headSet(position);
+        SortedSet<Long> moreSet = keys.tailSet(position);
+        if(lessSet.isEmpty()) return values.get(moreSet.first());
+        if(moreSet.isEmpty()) return values.get(lessSet.last());
+        float a = values.get(lessSet.last());
+        float b = values.get(moreSet.first());
+        float delta = moreSet.first() - lessSet.last();
+        float t1 = (float)(position - lessSet.last())/delta;
+        float t2 = (float)(moreSet.first() - position)/delta;
+        return a*t1 + b*t2;
     }
 
     public float max() {
@@ -53,5 +50,14 @@ public class Sampler {
 
     public long first() {
         return values.firstKey();
+    }
+
+    public Sampler cut(long first, long last) {
+        SortedMap<Long, Float> map = new TreeMap<>();
+        for(long key : values.keySet()) {
+            if(key >= first && key <= last)
+                map.put(key, values.get(key));
+        }
+        return new Sampler(map);
     }
 }
