@@ -22,10 +22,43 @@ public class HappinessGraph extends Graph {
                 return val.getHappiness();
             }
         }, source);
-        float max = ListTools.max(values, 0.0f);
-        float min = ListTools.min(values, 0.0f);
-
-        //Iterable<Float> times = ListTools.map()
-        return new LinkedList<Point>();
+        final float max = ListTools.max(ListTools.map(new ListTools.Fun1<Float, Float>() {
+            @Override
+            public Float call(Float val) {
+                return Math.abs(val);
+            }
+        }, values), 0.0f);
+        values = ListTools.map(new ListTools.Fun1<Float, Float>() {
+            @Override
+            public Float call(Float val) {
+                return val / max;
+            }
+        }, values);
+        Iterable<Long> times = ListTools.map(new ListTools.Fun1<HappinessStore.HistoryEntry, Long>() {
+            @Override
+            public Long call(HappinessStore.HistoryEntry val) {
+                return val.getTime();
+            }
+        }, source);
+        final long longest = ListTools.max(times, 0l);
+        final long earliest = longest - (60*60*1000); //1 hour;
+        times = ListTools.filter(new ListTools.Fun1<Long, Boolean>() {
+            @Override
+            public Boolean call(Long val) {
+                return val > earliest;
+            }
+        }, times);
+        Iterable<Float> newTimes = ListTools.map(new ListTools.Fun1<Long, Float>() {
+            @Override
+            public Float call(Long val) {
+                return (float)(val - earliest) / (longest - earliest);
+            }
+        }, times);
+        return ListTools.zipWith(new ListTools.Fun2<Float, Float, Point>() {
+            @Override
+            public Point call(Float left, Float right) {
+                return new Point(left, right);
+            }
+        }, values, newTimes);
     }
 }

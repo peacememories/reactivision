@@ -5,23 +5,25 @@ import java.util.Iterator;
 /**
  * Created by gabriel on 5/27/15.
  */
-public class IterableZipper<T, K> implements Iterable<Pair<T, K>> {
-    private final Iterable<T> left;
-    private final Iterable<K> right;
+public class IterableZipper<T1, T2, K> implements Iterable<K> {
+    private final Iterable<T1> left;
+    private final Iterable<T2> right;
+    private final ListTools.Fun2<T1, T2, K> fun;
 
-    public IterableZipper(Iterable<T> left, Iterable<K> right) {
+    public IterableZipper(ListTools.Fun2<T1, T2, K> fun, Iterable<T1> left, Iterable<T2> right) {
         this.left = left;
         this.right = right;
+        this.fun = fun;
     }
 
     @Override
-    public Iterator<Pair<T, K>> iterator() {
-        return null;
+    public Iterator<K> iterator() {
+        return new ZipIterator();
     }
 
-    public class ZipIterator implements Iterator<Pair<T, K>> {
-        private final Iterator<T> leftIterator;
-        private final Iterator<K> rightIterator;
+    public class ZipIterator implements Iterator<K> {
+        private final Iterator<T1> leftIterator;
+        private final Iterator<T2> rightIterator;
 
         private ZipIterator() {
             leftIterator = left.iterator();
@@ -34,8 +36,8 @@ public class IterableZipper<T, K> implements Iterable<Pair<T, K>> {
         }
 
         @Override
-        public Pair<T, K> next() {
-            return new Pair<>(leftIterator.next(), rightIterator.next());
+        public K next() {
+            return fun.call(leftIterator.next(), rightIterator.next());
         }
 
         @Override

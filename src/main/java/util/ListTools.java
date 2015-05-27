@@ -65,4 +65,17 @@ public class ListTools {
             }
         }, source);
     }
+
+    public static <T, K> Iterable<Pair<T, K>> zip(Iterable<T> left, Iterable<K> right) {
+        return zipWith(new Fun2<T, K, Pair<T, K>>() {
+            @Override
+            public Pair<T, K> call(T l, K r) {
+                return new Pair<T, K>(l, r);
+            }
+        }, left, right);
+    }
+
+    public static <T1, T2, K> Iterable<K> zipWith(Fun2<T1, T2, K> fun, Iterable<T1> left, Iterable<T2> right) {
+        return new IterableZipper<>(fun, left, right);
+    }
 }
