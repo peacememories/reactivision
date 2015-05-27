@@ -33,7 +33,7 @@ public abstract class Graph implements Renderable {
             }
         }, getPoints())) {
             if(p.x > 0 && p.x < getWidth())
-                context.vertex(p.x, getHeight()-p.y);
+                context.vertex(p.x*getWidth(), getHeight()-p.y);
         }
         context.endShape();
         context.fill(50);
