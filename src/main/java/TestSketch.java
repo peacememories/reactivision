@@ -1,3 +1,4 @@
+import TUIO.TuioClient;
 import stores.AgentStore;
 import stores.HappinessStore;
 import util.Conf;
@@ -5,6 +6,9 @@ import processing.core.*;
 import shiffman.box2d.*;
 import util.Widget;
 import widgets.HappinessGraph;
+//import
+//import
+
 //import org.jbox2d.collision.shapes.
 
 public class TestSketch extends PApplet {
@@ -25,9 +29,10 @@ public class TestSketch extends PApplet {
 	// A list for all of our rectangles
 	//ArrayList<Box> boxes;
 
-  // code taken from:
-  // https://processing.org/tutorials/eclipse/
-  // (there's more there)
+
+  TuioClient tuio;
+  private long lastFrame;
+
   public void setup() {
     size(Conf.SCREEN_WIDTH, Conf.SCREEN_HEIGHT);
     background(0);
@@ -42,13 +47,19 @@ public class TestSketch extends PApplet {
     // ---------- Creating Game Pieces ------
     //ball = new Ball(box2d, this);
 
-    lastFrame = System.currentTimeMillis();
-
     graphWidget = new Widget().setChild(new HappinessGraph(150, 100)).setPosition(Conf.SCREEN_WIDTH / 2 - 75, 10);
+
+
+    tuio = new TuioClient();
+    MyTuioListener tuioListener = new MyTuioListener();
+    tuio.addTuioListener(tuioListener);
+    tuio.connect();
+
+
+    lastFrame = System.currentTimeMillis();
   }
 
   // ------- DEMO CIRCLE VARS ---------------
-  private long lastFrame;
   public void draw() {
     long now = System.currentTimeMillis();
     float deltaSeconds = (now - lastFrame) / 1000.0f;
