@@ -11,8 +11,8 @@ version = '1.0'
 
 dependencies {
     compile 'org.processing:core:2.2.1'
-    //compile 'net.sourceforge.tuio:tuio:1.4'
-    //compile 'com.artistech:tuio-lib:1.1.3'
+    compile 'net.sourceforge.tuio:tuio:1.4'
+    //compile 'net.sourceforge:tuio:1.4'
     compile name: 'box2d_processing'
     compile name: 'jbox2d-library-2.2.1-ds'
 }
