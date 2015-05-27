@@ -39,6 +39,12 @@ public class FacilitiesStore {
         //f2.radius = 310;
         f2.position = new PVector(Conf.SCREEN_WIDTH / 4, Conf.SCREEN_HEIGHT / 4);
         facilities.add(f2);
+
+        Facility f3 = new Facility();
+        f3.type = FacilityType.CLUB;
+        f3.radius = 80;
+        f3.position = new PVector(Conf.SCREEN_WIDTH * 1.3f / 4, Conf.SCREEN_HEIGHT * 2.8f / 4);
+        facilities.add(f3);
     }
     public Set<Facility> getFacilities() {
         return Collections.unmodifiableSet(facilities);

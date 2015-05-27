@@ -58,6 +58,8 @@ public class TestSketch extends PApplet {
     AgentStore.getStore().update(deltaSeconds);
     //FacilitiesStore.getStore().update(deltaSeconds); //???
 
+    //System.out.println(AgentStore.getStore().avgHappiness());
+
 
     // RENDERING -------------
     background(30);
@@ -66,7 +68,7 @@ public class TestSketch extends PApplet {
     AgentRenderer.getRenderer().render(this);
     FacilityRenderer.getRenderer().render(this);
 
-    graphWidget.render(this);
+    //graphWidget.render(this);
 
     lastFrame = now;
   }

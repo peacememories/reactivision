@@ -1,3 +1,5 @@
+import util.ListTools;
+
 import java.util.HashSet;
 import java.util.Collections;
 import java.util.Set;
@@ -22,7 +24,7 @@ public class AgentStore {
     private AgentStore() {
         agentCtrls = new HashSet<>();
 
-        for(int i = 0; i < 10; ++i) {
+        for(int i = 0; i < 20; ++i) {
             // (1234 + i) ← random generator seed
             agentCtrls.add(new Agent(1234 + i));
         }
@@ -30,6 +32,14 @@ public class AgentStore {
 
     public Set<Agent> getAgents() {
         return Collections.unmodifiableSet(agentCtrls);
+    }
+
+    public float avgHappiness() {
+        float happiness = 0;
+        for(Agent a : agentCtrls) {
+            happiness += a.getHappiness();
+        }
+        return happiness / agentCtrls.size();
     }
 
     public int nrOfActiveAgents() {
