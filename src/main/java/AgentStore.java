@@ -23,11 +23,10 @@ public class AgentStore {
         agentCtrls = new HashSet<>();
 
         //TODO dummy data for now
-        int screenWidth = 600;
-        int screenHeight = 600;
-        agentCtrls.add(new Agent(1233, screenWidth, screenHeight));
-        agentCtrls.add(new Agent(5679, screenWidth, screenHeight));
-        agentCtrls.add(new Agent(9013, screenWidth, screenHeight));
+        for(int i = 0; i < 50; ++i) {
+            // (1234 + i) ← random generator seed
+            agentCtrls.add(new Agent(1234 + i));
+        }
     }
 
     public Set<Agent> getAgents() {

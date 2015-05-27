@@ -7,7 +7,6 @@ import java.util.Random;
 public class Agent {
     private Random random;
     private float secondsToGoalChange = 0.0f;
-    private final int screenWidth, screenHeight;
 
     // controls whether the agent is in random mode (just wandering) or moving towards a goal
     private boolean idle = true;
@@ -15,15 +14,13 @@ public class Agent {
     private float speed = 0.0f;
     private PVector position, goal;
 
-    public Agent(long seed, int screenWidth, int screenHeight) {
+    public Agent(long seed) {
         random = new Random(seed);
-        this.screenWidth = screenWidth;
-        this.screenHeight = screenHeight;
 
         PVector pos = randomGoal();
 
         // crosses table in 5 to 9 seconds if moving perfectly along axis
-        float v = Math.min(screenHeight, screenWidth) /
+        float v = Math.min(Conf.SCREEN_HEIGHT, Conf.SCREEN_WIDTH) /
                 (5 + 4 * random.nextFloat());
 
         //System.out.println("With speed: " + v);
@@ -63,8 +60,8 @@ public class Agent {
     }
 
     private PVector randomGoal() {
-        int x = random.nextInt(screenWidth);
-        int y = random.nextInt(screenHeight);
+        int x = random.nextInt(Conf.SCREEN_WIDTH);
+        int y = random.nextInt(Conf.SCREEN_HEIGHT);
         return new PVector(x, y);
     }
 

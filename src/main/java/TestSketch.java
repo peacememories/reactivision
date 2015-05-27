@@ -22,18 +22,18 @@ public class TestSketch extends PApplet {
   // https://processing.org/tutorials/eclipse/
   // (there's more there)
   public void setup() {
-    size(600, 600);
+    size(Conf.SCREEN_WIDTH, Conf.SCREEN_HEIGHT);
     background(0);
     smooth();
 
     // ---------- Box2D-Processing Setup ----
-    box2d = new Box2DProcessing(this);
-    box2d.createWorld();
+    //box2d = new Box2DProcessing(this);
+    //box2d.createWorld();
     // We are setting a custom gravity
-    box2d.setGravity(0, -20);
+    //box2d.setGravity(0, -20);
 
     // ---------- Creating Game Pieces ------
-    ball = new Ball(box2d, this);
+    //ball = new Ball(box2d, this);
 
     lastFrame = System.currentTimeMillis();
   }
