@@ -1,3 +1,4 @@
+import stores.AgentStore;
 import stores.HappinessStore;
 import util.Conf;
 import processing.core.*;
@@ -43,7 +44,7 @@ public class TestSketch extends PApplet {
 
     lastFrame = System.currentTimeMillis();
 
-    graphWidget = new Widget().setChild(new HappinessGraph(150, 100)).setPosition(Conf.SCREEN_WIDTH/2-75, 10);
+    graphWidget = new Widget().setChild(new HappinessGraph(150, 100)).setPosition(Conf.SCREEN_WIDTH / 2 - 75, 10);
   }
 
   // ------- DEMO CIRCLE VARS ---------------
