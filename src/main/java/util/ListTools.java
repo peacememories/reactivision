@@ -1,5 +1,7 @@
 package util;
 
+import java.util.Iterator;
+
 /**
  * Created by gabriel on 5/27/15.
  */
@@ -28,30 +30,39 @@ public class ListTools {
     }
 
     public static <T extends Comparable<T>> T max(Iterable<T> source) {
-        T first = source.iterator().next();
+        Iterator<T> it = source.iterator();
+        T first = it.hasNext() ? it.next() : null;
         if(first != null) {
-            return foldLeft(first, new Fun2<T, T, T>() {
-                @Override
-                public T call(T val1, T val2) {
-                    return val1.compareTo(val2) == 1 ? val1 : val2;
-                }
-            }, source);
+            return max(source, first);
         } else {
             return null;
         }
     }
 
+    public static <T extends Comparable<T>> T max(Iterable<T> source, T neutral) {
+        return foldLeft(neutral, new Fun2<T, T, T>() {
+            @Override
+            public T call(T val1, T val2) {
+                return val1.compareTo(val2) == 1 ? val1 : val2;
+            }
+        }, source);
+    }
+
     public static <T extends Comparable<T>> T min(Iterable<T> source) {
-        T first = source.iterator().next();
-        if(first != null) {
-            return foldLeft(first, new Fun2<T, T, T>() {
-                @Override
-                public T call(T val1, T val2) {
-                    return val1.compareTo(val2) == -1 ? val1 : val2;
-                }
-            }, source);
-        } else {
+        Iterator<T> it = source.iterator();
+        T first = it.hasNext() ? it.next() : null;
+        if(first != null)
+            return min(source, first);
+        else
             return null;
-        }
+    }
+
+    public static <T extends Comparable<T>> T min(Iterable<T> source, T neutral) {
+        return foldLeft(neutral, new Fun2<T, T, T>() {
+            @Override
+            public T call(T val1, T val2) {
+                return val1.compareTo(val2) == -1 ? val1 : val2;
+            }
+        }, source);
     }
 }
