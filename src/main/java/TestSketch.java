@@ -1,5 +1,7 @@
 import processing.core.*;
 import shiffman.box2d.*;
+import util.Widget;
+import widgets.HappinessGraph;
 //import org.jbox2d.collision.shapes.
 
 public class TestSketch extends PApplet {
@@ -8,6 +10,8 @@ public class TestSketch extends PApplet {
   Box2DProcessing box2d;
 
   Ball ball;
+
+  Widget graphWidget;
 
   public TestSketch() {
     super();
@@ -36,6 +40,8 @@ public class TestSketch extends PApplet {
     //ball = new Ball(box2d, this);
 
     lastFrame = System.currentTimeMillis();
+
+    graphWidget = new Widget().setChild(new HappinessGraph(300, 150));
   }
 
   // ------- DEMO CIRCLE VARS ---------------
@@ -60,7 +66,7 @@ public class TestSketch extends PApplet {
     AgentRenderer.getRenderer().render(this);
     FacilityRenderer.getRenderer().render(this);
 
-
+    graphWidget.render(this);
 
     lastFrame = now;
   }

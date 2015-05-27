@@ -1,3 +1,5 @@
+package stores;
+
 import util.Dispatcher;
 
 import java.util.Collections;
