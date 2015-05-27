@@ -34,7 +34,7 @@ public class FacilityRenderer {
                     ctxt.fill(200.0f, 200.0f, 200.0f, 120.5f);
                     break;
             }
-            ctxt.stroke(0, 230.0f, 0);
+            ctxt.stroke(130);
             ctxt.ellipse(0, 0, facility.radius * 2, facility.radius * 2);
             ctxt.popMatrix();
         }

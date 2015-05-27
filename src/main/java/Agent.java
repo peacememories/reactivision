@@ -36,13 +36,13 @@ public class Agent {
         setSpeed(v);
 
         preferences = new HashMap<>();
-        for(FacilityType t : FacilityType.values()) {
-            float pref = (random.nextFloat() * 2 - 1) * 0.01f;
-            preferences.put(t, pref);
-        }
+
+        float excitation = random.nextFloat();
+        //System.out.println(excitation);
+        preferences.put(FacilityType.SPORT, -excitation * 0.01f);
+        preferences.put(FacilityType.CLUB, excitation * 0.01f);
     }
 
-    //private boolean hasBeenInFacility = false;
     public void update(float deltaSeconds) {
         secondsToGoalChange -= deltaSeconds;
         if(secondsToGoalChange < 0 && idle) {

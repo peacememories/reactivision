@@ -25,15 +25,20 @@ public class AgentRenderer implements Renderable {
             ctxt.translate(pos.x, pos.y);
 
             //float red = 255.0f;
-            float red = (1.0f - agent.getHappiness()) / 2 * 255;
-            float green = (1.0f + agent.getHappiness()) / 2 * 255;
-            //float blue = (1.0f + agent.getHappiness()) / 2 * 180;
-            float blue = 0.0f;
-            ctxt.fill(red, green, blue);
+            //float red = (1.0f - agent.getHappiness()) / 2 * 255;
+            float red = agent.getHappiness() > 0 ? 0 : 255;
+            //float green = (1.0f + agent.getHappiness()) / 2 * 255;
+            float green = agent.getHappiness() > 0 ? 255 : 0;
+            float blue = (1.0f + agent.getHappiness()) / 2 * 60;
+            //float alpha = Math.abs(agent.getHappiness()) * 122 + 123;
+            float alpha = Math.abs(agent.getHappiness()) * 255;
+
+            //float blue = 0.0f;
+            ctxt.fill(red, green, blue, alpha);
 
             //System.out.println(agent.getHappiness() + " -> (" + red + ", " + green + ", " + blue + ")");
 
-            ctxt.stroke(0);
+            ctxt.stroke(130);
             ctxt.ellipse(0, 0, 10, 10);
             ctxt.popMatrix();
         }
