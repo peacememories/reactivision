@@ -68,7 +68,7 @@ public class TestSketch extends PApplet {
     AgentRenderer.getRenderer().render(this);
     FacilityRenderer.getRenderer().render(this);
 
-    //graphWidget.render(this);
+    graphWidget.render(this);
 
     lastFrame = now;
   }
