@@ -1,10 +1,9 @@
+import stores.HappinessStore;
+import util.Conf;
 import processing.core.*;
 import shiffman.box2d.*;
 import util.Widget;
 import widgets.HappinessGraph;
-//import com.artist
-//import tuio
-//import sourceforge.tuio.*;
 //import org.jbox2d.collision.shapes.
 
 public class TestSketch extends PApplet {
@@ -42,22 +41,13 @@ public class TestSketch extends PApplet {
     // ---------- Creating Game Pieces ------
     //ball = new Ball(box2d, this);
 
-    graphWidget = new Widget().setChild(new HappinessGraph(300, 150));
-
-
-    //tuioClient = new TuioClient();
-
-
-
-
     lastFrame = System.currentTimeMillis();
+
+    graphWidget = new Widget().setChild(new HappinessGraph(150, 100)).setPosition(Conf.SCREEN_WIDTH/2-75, 10);
   }
 
-  //private TuioClient tuioClient;
-  private long lastFrame;
-
-
   // ------- DEMO CIRCLE VARS ---------------
+  private long lastFrame;
   public void draw() {
     long now = System.currentTimeMillis();
     float deltaSeconds = (now - lastFrame) / 1000.0f;
@@ -68,7 +58,8 @@ public class TestSketch extends PApplet {
     // TODO if there should be any shapes that can leave the screen: delete them now
 
     AgentStore.getStore().update(deltaSeconds);
-    //FacilitiesStore.getStore().update(deltaSeconds); //???
+    HappinessStore.getInstance().update(now);
+    //stores.FacilitiesStore.getStore().update(deltaSeconds); //???
 
     //System.out.println(AgentStore.getStore().avgHappiness());
 

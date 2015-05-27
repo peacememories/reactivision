@@ -1,7 +1,11 @@
-/**
+package agents; /**
  * Created by moru on 5/26/2015.
  */
+import facilities.Facility;
+import facilities.FacilityType;
 import processing.core.PVector;
+import stores.FacilitiesStore;
+import util.Conf;
 
 import java.util.HashMap;
 import java.util.Map;

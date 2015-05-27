@@ -1,4 +1,9 @@
+package stores;
+
+import facilities.Facility;
+import facilities.FacilityType;
 import processing.core.PVector;
+import util.Conf;
 
 import java.util.HashSet;
 
@@ -6,7 +11,6 @@ import java.util.HashSet;
  * Created by moru on 5/27/2015.
  */
 
-import java.util.HashSet;
 import java.util.Collections;
 import java.util.Set;
 

@@ -16,6 +16,8 @@ public class HappinessStore implements Dispatcher.DispatchHandler {
     }
 
     private final LinkedList<HistoryEntry> history = new LinkedList<>();
+    private float lastHappiness;
+    private long lastTime;
 
     private HappinessStore() {
         Dispatcher.getInstance().register(this);
@@ -25,12 +27,23 @@ public class HappinessStore implements Dispatcher.DispatchHandler {
         return Collections.unmodifiableList(history);
     }
 
+    public void update(long time) {
+        long deltaTime = time-lastTime;
+        if(deltaTime > 1000) {
+            float newHappiness = AgentStore.getStore().avgHappiness();
+            if (history.isEmpty()) {
+                history.add(new HistoryEntry(time, 0));
+            } else {
+                history.add(new HistoryEntry(time, (newHappiness - lastHappiness) / deltaTime));
+            }
+            lastHappiness = newHappiness;
+            lastTime = time;
+        }
+    }
+
     @Override
     public void handle(Object payload) {
-        if(payload instanceof HistoryEntry) {
-            HistoryEntry entry = (HistoryEntry) payload;
-            history.add(entry);
-        }
+        //TODO delete this
     }
 
     public static class HistoryEntry {

@@ -1,4 +1,6 @@
+import agents.Agent;
 import processing.core.PVector;
+import stores.AgentStore;
 import util.Renderable;
 import processing.core.PApplet;
 

@@ -1,6 +1,8 @@
 package util;
 
+import java.util.Collection;
 import java.util.Iterator;
+import java.util.LinkedList;
 
 /**
  * Created by gabriel on 5/27/15.
@@ -77,5 +79,13 @@ public class ListTools {
 
     public static <T1, T2, K> Iterable<K> zipWith(Fun2<T1, T2, K> fun, Iterable<T1> left, Iterable<T2> right) {
         return new IterableZipper<>(fun, left, right);
+    }
+
+    public static <T> Collection<T> fromIterable(Iterable<T> source) {
+        LinkedList<T> list = new LinkedList<>();
+        for(T item : source) {
+            list.add(item);
+        }
+        return list;
     }
 }

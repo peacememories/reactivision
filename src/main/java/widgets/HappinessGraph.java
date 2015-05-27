@@ -41,17 +41,11 @@ public class HappinessGraph extends Graph {
             }
         }, source);
         final long longest = ListTools.max(times, 0l);
-        final long earliest = longest - (60*60*1000); //1 hour;
-        times = ListTools.filter(new ListTools.Fun1<Long, Boolean>() {
-            @Override
-            public Boolean call(Long val) {
-                return val > earliest;
-            }
-        }, times);
+        final long earliest = longest - (60*1000); //15 minutes;
         Iterable<Float> newTimes = ListTools.map(new ListTools.Fun1<Long, Float>() {
             @Override
             public Float call(Long val) {
-                return (float)(val - earliest) / (longest - earliest);
+                return (float)(val - earliest) / ((float)longest - earliest);
             }
         }, times);
         return ListTools.zipWith(new ListTools.Fun2<Float, Float, Point>() {
@@ -59,6 +53,6 @@ public class HappinessGraph extends Graph {
             public Point call(Float left, Float right) {
                 return new Point(left, right);
             }
-        }, values, newTimes);
+        }, newTimes, values);
     }
 }

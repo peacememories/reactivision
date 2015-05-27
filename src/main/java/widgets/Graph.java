@@ -26,18 +26,19 @@ public abstract class Graph implements Renderable {
     public void render(PApplet context) {
         context.noFill();
         context.beginShape();
-        for(Point p: ListTools.map(new ListTools.Fun1<Point, Point>() {
+        context.stroke(0, 255, 255);
+        Iterable<Point> points = ListTools.map(new ListTools.Fun1<Point, Point>() {
             @Override
             public Point call(Point val) {
-                return new Point(val.x*getWidth(), (getHeight()-val.y)/2);
+                return new Point(val.x*getWidth(), getHeight()*(1-val.y)/2);
             }
-        }, getPoints())) {
-            if(p.x > 0 && p.x < getWidth())
-                context.vertex(p.x*getWidth(), getHeight()-p.y);
+        }, getPoints());
+        for(Point p: points) {
+            if(p.x >= 0 && p.x <= getWidth())
+                context.vertex(p.x, p.y);
         }
         context.endShape();
-        context.fill(50);
-        context.rect(0, 0, getWidth(), getHeight());
+        context.rect(getWidth()/2, getHeight()/2, getWidth(), getHeight());
     }
 
     public abstract Iterable<Point> getPoints();

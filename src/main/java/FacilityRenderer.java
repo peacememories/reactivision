@@ -2,8 +2,9 @@
  * Created by moru on 27/05/15.
  */
 
+import facilities.Facility;
 import processing.core.PVector;
-import util.Renderable;
+import stores.FacilitiesStore;
 import processing.core.PApplet;
 
 public class FacilityRenderer {

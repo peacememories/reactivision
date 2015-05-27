@@ -1,4 +1,6 @@
-import util.ListTools;
+package stores;
+
+import agents.Agent;
 
 import java.util.HashSet;
 import java.util.Collections;
