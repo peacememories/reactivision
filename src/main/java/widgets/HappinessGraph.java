@@ -22,10 +22,10 @@ public class HappinessGraph extends Graph {
                 return val.getHappiness();
             }
         }, source);
-        float max = ListTools.max(values);
-        float min = ListTools.min(values);
+        float max = ListTools.max(values, 0.0f);
+        float min = ListTools.min(values, 0.0f);
 
         //Iterable<Float> times = ListTools.map()
-        return null;
+        return new LinkedList<Point>();
     }
 }
