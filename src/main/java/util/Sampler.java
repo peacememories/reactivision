@@ -18,7 +18,7 @@ public class Sampler {
         long lastSample = values.firstKey();
         for(long currentSample: new TreeSet<>(values.keySet())) {
             if(lastSample == currentSample) continue;
-            if(position > lastSample) {
+            if(position < currentSample) {
                 float a = values.get(lastSample);
                 float b = values.get(currentSample);
                 long dist = currentSample-lastSample;
@@ -40,7 +40,7 @@ public class Sampler {
     }
 
     public float min() {
-        float min = Float.NEGATIVE_INFINITY;
+        float min = Float.POSITIVE_INFINITY;
         for(float i : values.values()) {
             if(i < min) min = i;
         }
