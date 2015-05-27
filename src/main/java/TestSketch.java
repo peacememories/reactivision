@@ -46,17 +46,19 @@ public class TestSketch extends PApplet {
 
     // UPDATES ---------------
     // We must always step through time!
-    box2d.step(1.0f / 60, 10, 10);
+    //box2d.step(1.0f / 60, 10, 10);
     // TODO if there should be any shapes that can leave the screen: delete them now
 
     AgentStore.getStore().update(deltaSeconds);
+    //FacilitiesStore.getStore().update(deltaSeconds); //???
 
 
     // RENDERING -------------
     background(30);
-    ball.render(this);
+    //ball.render(this);
 
     AgentRenderer.getRenderer().render(this);
+    FacilityRenderer.getRenderer().render(this);
 
 
 

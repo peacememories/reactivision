@@ -22,7 +22,8 @@ public class AgentStore {
     private AgentStore() {
         agentCtrls = new HashSet<>();
 
-        for(int i = 0; i < 50; ++i) {
+        //for(int i = 0; i < 50; ++i) {
+        for(int i = 0; i < 1; ++i) {
             // (1234 + i) ← random generator seed
             agentCtrls.add(new Agent(1234 + i));
         }
