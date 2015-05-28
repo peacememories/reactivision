@@ -29,10 +29,21 @@ public abstract class Graph implements Renderable {
     public float getWidth() { return width; }
     public float getHeight() { return height; }
 
+    /**
+     * @param dataCoords (0-1) for time x (-1,+1) for value
+     * @return pixel coordinates within the widget
+     */
+    private PVector toPixelCoords(PVector dataCoords) {
+        return new PVector(dataCoords.x * getWidth(),
+                (1 - dataCoords.y)*getHeight()/2);
+    }
+
     public void render(PApplet context) {
 
         LinkedList<PVector> points = new LinkedList(getPoints());
 
+        PVector firstCoords = toPixelCoords(points.getFirst());
+        PVector lastCoords = toPixelCoords(points.getLast());
 
         // paint lower half ---------------
 
@@ -40,29 +51,29 @@ public abstract class Graph implements Renderable {
         context.noStroke();
         context.fill(80,180,80);
         context.vertex(0, height); // start in lower left corner
-        context.vertex(0, points.getFirst().y);
+        context.vertex(0, firstCoords.y);
         for(PVector p : points) {
- //           if(p.x >= 0 && p.x <= getWidth()) {
-                context.vertex(p.x*getWidth(), (1-p.y)*getHeight()/2);
-//            }
+            PVector coords = toPixelCoords(p);
+            context.vertex(coords.x, coords.y);
         }
-        context.vertex(width, points.getLast().y);
+        context.vertex(width, lastCoords.y);
         context.vertex(width, height);
         context.endShape();
 
         // paint upper half ---------------
         context.beginShape();
-        context.noStroke();
-        context.fill(120,0,0);
+        //context.noStroke();
+        context.fill(80,0,0);
         context.vertex(0, 0); // start in lower left corner
-        context.vertex(0, points.getFirst().y);
+        context.vertex(0, height); //TODO debug, remove me
+        context.vertex(0, firstCoords.y);
         for(PVector p : points) {
-            //           if(p.x >= 0 && p.x <= getWidth()) {
-            context.vertex(p.x, p.y);
-//            }
+            PVector coords = toPixelCoords(p);
+            context.vertex(coords.x, coords.y);
         }
-        context.vertex(width, points.getLast().y);
+        context.vertex(width, lastCoords.y);
         context.vertex(width, 0);
+        //context.vertex(0, 0);
         context.endShape();
 
 
