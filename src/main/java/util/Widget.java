@@ -1,11 +1,13 @@
 package util;
 
 import processing.core.PApplet;
+import processing.core.PVector;
+import processing.event.TouchEvent;
 
 /**
  * Created by gabriel on 26/05/2015.
  */
-public class Widget implements Renderable {
+public class Widget implements Renderable, Dispatcher.DispatchHandler {
     private Renderable child;
 
     private float x, y;
@@ -45,4 +47,18 @@ public class Widget implements Renderable {
             context.popMatrix();
         }
     }
+
+    @Override
+    public void handle(Object payload) {
+        if(payload instanceof TouchEvent) {
+            TouchEvent e = (TouchEvent) payload;
+            Object ntv = e.getNative();
+            if(ntv instanceof PVector) {
+                PVector coords = (PVector) ntv;
+                //if within bounds: call touch-callback of contained element
+
+            }
+        }
+    }
+
 }

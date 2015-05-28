@@ -2,6 +2,8 @@ package widgets;
 
 import processing.core.PApplet;
 import processing.core.PVector;
+import processing.event.TouchEvent;
+import util.Dispatcher;
 import util.ListTools;
 import util.Renderable;
 
@@ -49,9 +51,6 @@ public abstract class Graph implements Renderable {
         context.endShape();
 
         // paint upper half ---------------
-
-
-
         context.beginShape();
         context.noStroke();
         context.fill(120,0,0);
