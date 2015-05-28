@@ -14,6 +14,10 @@ public class Widget implements Renderable, Dispatcher.DispatchHandler {
     private float angle;
     private float scaleX = 1, scaleY = 1;
 
+    public Widget() {
+        Dispatcher.getInstance().register(this);
+    }
+
     public Widget setPosition(float x, float y) {
         this.x = x;
         this.y = y;
@@ -50,13 +54,11 @@ public class Widget implements Renderable, Dispatcher.DispatchHandler {
 
     @Override
     public void handle(Object payload) {
-        System.out.println("In Widget Touch Handler 1");
         if(payload instanceof TouchEvent) {
             TouchEvent e = (TouchEvent) payload;
             Object ntv = e.getNative();
             if(ntv instanceof PVector) {
                 PVector coords = (PVector) ntv;
-                System.out.println("In Widget Touch Handler 2");
                 if(inWidget(coords)) {
                     this.handleTouch(e);
                 }
