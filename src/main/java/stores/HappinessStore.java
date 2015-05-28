@@ -3,8 +3,6 @@ package stores;
 import util.Dispatcher;
 import util.Sampler;
 
-import java.util.Collections;
-import java.util.LinkedList;
 import java.util.SortedMap;
 import java.util.TreeMap;
 
@@ -32,7 +30,7 @@ public class HappinessStore implements Dispatcher.DispatchHandler {
 
     public void update(long time) {
         long deltaTime = time-lastTime;
-        float newHappiness = AgentStore.getStore().avgHappiness();
+        float newHappiness = AgentStore.getStore().avgExcitation();
         if (history.isEmpty()) {
             history.put(time, 0.0f);
         } else {

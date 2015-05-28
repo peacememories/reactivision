@@ -73,7 +73,7 @@ public class TestSketch extends PApplet {
     HappinessStore.getInstance().update(now);
     //stores.FacilitiesStore.getStore().update(deltaSeconds); //???
 
-    //System.out.println(AgentStore.getStore().avgHappiness());
+    //System.out.println(AgentStore.getStore().avgExcitation());
 
 
     // RENDERING -------------

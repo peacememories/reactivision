@@ -36,13 +36,14 @@ public class AgentStore {
         return Collections.unmodifiableSet(agentCtrls);
     }
 
-    public float avgHappiness() {
+    public float avgExcitation() {
         float happiness = 0;
         for(Agent a : agentCtrls) {
             happiness += a.getHappiness();
         }
         return happiness / agentCtrls.size();
     }
+
 
     public int nrOfActiveAgents() {
         return agentCtrls.size();
