@@ -15,6 +15,7 @@ import java.util.LinkedList;
  */
 public abstract class Graph implements Renderable {
     private float width, height;
+    PVector playerMarker = null;
 
     public Graph(float width, float height) {
         this.width = width;
@@ -81,16 +82,27 @@ public abstract class Graph implements Renderable {
 
 
         // paint border
-
         context.stroke(0, 255, 255);
         context.noFill();
         context.rect(getWidth()/2, getHeight()/2, getWidth(), getHeight());
+
+        // paint player marker
+        if(playerMarker != null) {
+            context.stroke(200,200,200);
+            context.line(playerMarker.x, 0, playerMarker.x, getHeight());
+            context.line(0, playerMarker.y, getWidth(), 0);
+
+            System.out.println("Drawing player marker at " + playerMarker);
+
+        }
 
     }
 
     @Override
     public void handleTouch(TouchEvent e) {
-        System.out.println("In Graph Touch Handler");
+        LinkedList<PVector> points = new LinkedList(getPoints());
+        playerMarker = points.getLast().get();
+        System.out.println("Placed marker at y = " + playerMarker.y);
 
     }
 

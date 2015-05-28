@@ -62,7 +62,6 @@ public class Widget implements Renderable, Dispatcher.DispatchHandler {
                 if(inWidget(coords)) {
                     this.handleTouch(e);
                 }
-                //if within bounds: call touch-callback of contained element
             }
         }
     }
