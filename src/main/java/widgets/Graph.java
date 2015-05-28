@@ -26,7 +26,10 @@ public abstract class Graph implements Renderable {
         this.height = height;
     }
 
+    @Override
     public float getWidth() { return width; }
+
+    @Override
     public float getHeight() { return height; }
 
     /**
@@ -49,7 +52,7 @@ public abstract class Graph implements Renderable {
 
         context.beginShape();
         context.noStroke();
-        context.fill(80,180,80);
+        context.fill(80, 180, 80);
         context.vertex(0, height); // start in lower left corner
         context.vertex(0, firstCoords.y);
         for(PVector p : points) {
@@ -82,6 +85,12 @@ public abstract class Graph implements Renderable {
         context.stroke(0, 255, 255);
         context.noFill();
         context.rect(getWidth()/2, getHeight()/2, getWidth(), getHeight());
+
+    }
+
+    @Override
+    public void handleTouch(TouchEvent e) {
+        System.out.println("In Graph Touch Handler");
 
     }
 

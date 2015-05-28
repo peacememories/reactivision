@@ -1,5 +1,6 @@
 import agents.Agent;
 import processing.core.PVector;
+import processing.event.TouchEvent;
 import stores.AgentStore;
 import util.Renderable;
 import processing.core.PApplet;
@@ -41,8 +42,17 @@ public class AgentRenderer implements Renderable {
             //System.out.println(agent.getHappiness() + " -> (" + red + ", " + green + ", " + blue + ")");
 
             ctxt.stroke(130);
-            ctxt.ellipse(0, 0, 10, 10);
+            ctxt.ellipse(0, 0, getWidth(), getHeight());
             ctxt.popMatrix();
         }
     }
+
+    @Override
+    public float getWidth() { return 10.0f; }
+
+    @Override
+    public float getHeight() { return 10.0f; }
+
+    @Override
+    public void handleTouch(TouchEvent e) {}
 }

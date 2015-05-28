@@ -50,15 +50,32 @@ public class Widget implements Renderable, Dispatcher.DispatchHandler {
 
     @Override
     public void handle(Object payload) {
+        System.out.println("In Widget Touch Handler 1");
         if(payload instanceof TouchEvent) {
             TouchEvent e = (TouchEvent) payload;
             Object ntv = e.getNative();
             if(ntv instanceof PVector) {
                 PVector coords = (PVector) ntv;
+                System.out.println("In Widget Touch Handler 2");
+                if(inWidget(coords)) {
+                    this.handleTouch(e);
+                }
                 //if within bounds: call touch-callback of contained element
-
             }
         }
     }
 
+    private boolean inWidget(PVector p) {
+        return this.x <= p.x && p.x <= this.x + this.getWidth() &&
+               this.y <= p.y && p.y <= this.y + this.getHeight();
+    }
+
+    @Override
+    public float getWidth() { return child.getWidth(); }
+
+    @Override
+    public float getHeight() { return child.getHeight(); }
+
+    @Override
+    public void handleTouch(TouchEvent e) { child.handleTouch(e); }
 }
