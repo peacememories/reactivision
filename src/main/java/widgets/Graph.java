@@ -16,6 +16,7 @@ import java.util.LinkedList;
 public abstract class Graph implements Renderable {
     private float width, height;
     PVector playerMarker = null;
+    private long markerTime;
 
     public Graph(float width, float height) {
         this.width = width;
@@ -51,7 +52,7 @@ public abstract class Graph implements Renderable {
 
 
         float duration = points.getLast().x - points.getFirst().x;
-        float offset = points.getFirst().x;
+        float timeSinceMarker = 1-(float)(System.currentTimeMillis() - markerTime)/duration;
 
         // paint lower half ---------------
 
@@ -62,7 +63,7 @@ public abstract class Graph implements Renderable {
         context.vertex(0, firstCoords.y);
         for(PVector p : points) {
             PVector coords = toPixelCoords(p);
-            context.vertex((coords.x-offset)/duration, coords.y);
+            context.vertex(coords.x/duration, coords.y);
         }
         context.vertex(width, lastCoords.y);
         context.vertex(width, height);
@@ -77,7 +78,7 @@ public abstract class Graph implements Renderable {
         context.vertex(0, firstCoords.y);
         for(PVector p : points) {
             PVector coords = toPixelCoords(p);
-            context.vertex((coords.x-offset)/duration, coords.y);
+            context.vertex(coords.x/duration, coords.y);
         }
         context.vertex(width, lastCoords.y);
         context.vertex(width, 0);
@@ -89,6 +90,10 @@ public abstract class Graph implements Renderable {
         context.stroke(0, 255, 255);
         context.noFill();
         context.rect(getWidth()/2, getHeight()/2, getWidth(), getHeight());
+
+        context.line(0, getHeight()/2, getWidth(), getHeight()/2);
+        if(timeSinceMarker>=0 && timeSinceMarker<= 1)
+            context.line(getWidth()*timeSinceMarker, 0, getWidth()*timeSinceMarker, getHeight());
 
         // paint player marker
         if(playerMarker != null) {
@@ -104,9 +109,8 @@ public abstract class Graph implements Renderable {
 
     @Override
     public void handleTouch(TouchEvent e) {
-        LinkedList<PVector> points = new LinkedList(getPoints());
-        playerMarker = points.getLast().get();
-        System.out.println("Placed marker at y = " + playerMarker.y);
+        markerTime = System.currentTimeMillis();
+        System.out.println("Placed marker at y = " + markerTime);
 
     }
 
