@@ -91,7 +91,12 @@ public abstract class Graph implements Renderable {
         context.noFill();
         context.rect(getWidth()/2, getHeight()/2, getWidth(), getHeight());
 
+        // paint x-axis
+        context.stroke(255);
         context.line(0, getHeight()/2, getWidth(), getHeight()/2);
+
+        // paint player marker
+        context.stroke(255, 120);
         if(timeSinceMarker>=0 && timeSinceMarker<= 1)
             context.line(getWidth()*timeSinceMarker, 0, getWidth()*timeSinceMarker, getHeight());
 
