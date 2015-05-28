@@ -44,6 +44,23 @@ public class AgentStore {
         return happiness / agentCtrls.size();
     }
 
+    public float summedHappiness() {
+        float happiness = 0;
+        for(Agent a : agentCtrls) {
+            if(a.getHappiness() > 0)
+                happiness += a.getHappiness();
+        }
+        return happiness;
+    }
+
+    public float summedFrustration() {
+        float frustration = 0;
+        for(Agent a : agentCtrls) {
+            if(a.getHappiness() < 0)
+                frustration += a.getHappiness();
+        }
+        return -frustration;
+    }
 
     public int nrOfActiveAgents() {
         return agentCtrls.size();
