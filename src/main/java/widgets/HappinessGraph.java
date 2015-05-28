@@ -20,8 +20,8 @@ public class HappinessGraph extends Graph {
     public Collection<PVector> getPoints() {
         Sampler sampler = HappinessStore.getInstance().getLogs();
         Collection<PVector> vectors = new LinkedList<>();
-        int steps = 20;
-        long delta = 2000;
+        int steps = 1000;
+        long delta = 20000;
         long stepwidth = delta/steps;
         long now = sampler.last();
         sampler = sampler.cut(now-delta, now);
