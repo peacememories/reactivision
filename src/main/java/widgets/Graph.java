@@ -49,6 +49,10 @@ public abstract class Graph implements Renderable {
         PVector firstCoords = toPixelCoords(points.getFirst());
         PVector lastCoords = toPixelCoords(points.getLast());
 
+
+        float duration = points.getLast().x - points.getFirst().x;
+        float offset = points.getFirst().x;
+
         // paint lower half ---------------
 
         context.beginShape();
@@ -58,7 +62,7 @@ public abstract class Graph implements Renderable {
         context.vertex(0, firstCoords.y);
         for(PVector p : points) {
             PVector coords = toPixelCoords(p);
-            context.vertex(coords.x, coords.y);
+            context.vertex((coords.x-offset)/duration, coords.y);
         }
         context.vertex(width, lastCoords.y);
         context.vertex(width, height);
@@ -73,7 +77,7 @@ public abstract class Graph implements Renderable {
         context.vertex(0, firstCoords.y);
         for(PVector p : points) {
             PVector coords = toPixelCoords(p);
-            context.vertex(coords.x, coords.y);
+            context.vertex((coords.x-offset)/duration, coords.y);
         }
         context.vertex(width, lastCoords.y);
         context.vertex(width, 0);

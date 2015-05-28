@@ -24,11 +24,11 @@ public class HappinessGraph extends Graph {
         long delta = 20000;
         long stepwidth = delta/steps;
         long now = sampler.last();
-        sampler = sampler.cut(now-delta, now);
         float scale = 1.0f/Math.max(Math.abs(sampler.max()), Math.abs(sampler.min()));
+        sampler = sampler.cut(now-delta, now);
         for(int i = 0; i < steps ;i++) {
             long t = i*stepwidth+(now-delta);
-            vectors.add(new PVector((float)i/steps, sampler.sample(t)*scale));
+            vectors.add(new PVector((float)(t+delta-now), sampler.sample(t)*scale));
         }
         return vectors;
     }
